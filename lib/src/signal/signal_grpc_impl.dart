@@ -88,12 +88,10 @@ class GRPCWebSignal extends Signal {
     _requestStream.add(request);
 
     Function(String, dynamic) handler;
-    handler = (respid, desc) {
-      if (respid == id) {
-        completer.complete(desc);
-      }
+    handler = (desc) {
+      completer.complete(desc);
     };
-    _emitter.once('description', handler);
+    _emitter.once('join-reply', handler);
     return completer.future as Future<RTCSessionDescription>;
   }
 
